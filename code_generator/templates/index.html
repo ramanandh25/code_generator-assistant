@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Code Generator and Fixer</title>
+</head>
+<body>
+    <h1>Code Generator and Fixer</h1>
+
+    <h2>Generate Code</h2>
+    <form action="/generate_code/" method="post">
+        <textarea name="code_description" rows="5" cols="50" placeholder="Enter code description here"></textarea><br>
+        <select name="lang">
+            <option value="java">Java</option>
+            <option value="cpp">C++</option>
+            <option value="python">Python</option>
+        </select><br>
+        <input type="submit" value="Generate">
+    </form>
+
+    <h2>Fix Generated Code</h2>
+    <form action="/fix_code/" method="post">
+        <textarea name="fix_instructions" rows="5" cols="50" placeholder="Enter fix instructions here"></textarea><br>
+        <input type="submit" value="Fix">
+    </form>
+
+    <h2>Execute Generated Code</h2>
+    <form action="/execute_code/" method="post">
+        <input type="submit" value="Execute">
+    </form>
+
+    <h2>Execution Result</h2>
+    <textarea rows="10" cols="80" readonly>{{ execution_result }}</textarea>
+
+    <h2>Generated Code</h2>
+    <textarea rows="10" cols="80" readonly>{{ generated_code }}</textarea>
+</body>
+</html>

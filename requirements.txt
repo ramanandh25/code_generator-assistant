@@ -1,0 +1,10 @@
+transformers==4.38.2
+sentencepiece==0.2.0
+absl-py==2.1.0
+black==24.3.0
+ctransformers==0.2.27
+fastapi[all]
+langchain==0.1.13
+langchain-community==0.0.29
+numpy==1.26.4
+
