@@ -1,0 +1,13 @@
+The web application uses the ollama package to serve the codellama model locally.
+
+The ollama app can automatically use the gpu is one is there locally
+
+The ollama model was having some issues with docker so couldnot create a docker container for the web application even though the docker file template is there
+
+The web app can support three functionalities
+
+1.Code generation- can generate code based on the users input prompt and language of choice [python,c++,java]
+
+2.Fix code - can fix the issues in the code or modify the code based on the input suggestions by the user
+
+3.Execute code- Currently the model can execute the code in python language and display the result to the ui
