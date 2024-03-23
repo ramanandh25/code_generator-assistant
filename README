@@ -1,0 +1,11 @@
+#Run the below commands to install ollama package to run open source llms locally in our system.The current setup is tested on ubuntu so if using windows please use WSL
+
+curl -fsSL https://ollama.com/install.sh | sh
+
+#Install codellama:7b model execute the command inside the git repository to access the modelfile
+ollama create codellama:7b -f ./modelfile
+
+#Once ollama is downloaded run the startup script to set up the server environment 
+./startup-script.sh 
+
+#go to the localhost port 8000 to send requests to the server.
