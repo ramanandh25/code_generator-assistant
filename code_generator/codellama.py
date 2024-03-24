@@ -1,3 +1,4 @@
+
 from langchain.llms import Ollama, CTransformers
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain, SequentialChain
@@ -16,7 +17,7 @@ llm = Ollama(model="codellama:7b")
 def clean_response_to_code(response: str) -> str:
     try:
         # Regular expression to match code blocks
-        code_blocks = re.findall(r'```([\s\S]*?)```', response)
+        code_blocks = re.findall(r"```([\s\S]*?)```", response)
 
         # If there are no code blocks, return the original response
         if not code_blocks:
@@ -25,15 +26,21 @@ def clean_response_to_code(response: str) -> str:
 
         # If there is more than one code block, return all of them
         if len(code_blocks) > 1:
-            CodeGenLogger.lgr.info(f"Found {len(code_blocks)} code blocks in the response.")
+            CodeGenLogger.lgr.info(
+                f"Found {len(code_blocks)} code blocks in the response."
+            )
             return "\n\n".join(code_blocks).strip()
 
         # If there is only one code block, return it
         extracted_code = code_blocks[0].strip()
-        CodeGenLogger.lgr.info(f"Extracted the code {extracted_code} from the generated response {response}.")
+        CodeGenLogger.lgr.info(
+            f"Extracted the code {extracted_code} from the generated response {response}."
+        )
         return extracted_code
     except Exception as e:
-        CodeGenLogger.lgr.error(f"Error {e} occurred while cleaning code from response.")
+        CodeGenLogger.lgr.error(
+            f"Error {e} occurred while cleaning code from response."
+        )
         raise ValueError("Error occurred while cleaning code from response.")
 
 
@@ -155,16 +162,20 @@ def execute_python_code(code: str) -> str:
             cwd=temp_dir,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            text=True  # Ensure output is text, not bytes
+            text=True,  # Ensure output is text, not bytes
         )
 
         # Check for errors
         if run_result.returncode != 0:
             error_message = run_result.stderr
-            CodeGenLogger.lgr.error(f"Errr occured while executing python code {error_message}")
+            CodeGenLogger.lgr.error(
+                f"Errr occured while executing python code {error_message}"
+            )
             return f"Error occurred while executing Python code: {error_message}"
 
-        CodeGenLogger.lgr.info(f"Executed python code for {code} and got {run_result.stdout} output")
+        CodeGenLogger.lgr.info(
+            f"Executed python code for {code} and got {run_result.stdout} output"
+        )
         # Return the execution result
         return run_result.stdout
 
@@ -194,5 +205,7 @@ def execute_code(code: str, language: str) -> str:
         raise
     except Exception as e:
         error_message = str(e)
-        CodeGenLogger.lgr.error(f"Unexpected error occurred while executing code: {error_message}")
+        CodeGenLogger.lgr.error(
+            f"Unexpected error occurred while executing code: {error_message}"
+        )
         raise ValueError(f"Unexpected error occurred: {error_message}")

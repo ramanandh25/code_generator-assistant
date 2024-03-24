@@ -63,12 +63,19 @@ async def fix_code(
 
 
 @app.post("/execute_code/", response_class=HTMLResponse)
-async def execute_generated_code(request: Request, code_manager: CodeManager = Depends(get_code_manager)):
+async def execute_generated_code(
+    request: Request, code_manager: CodeManager = Depends(get_code_manager)
+):
     try:
         execution_result = code_manager.execute_generated_code()
-        return templates.TemplateResponse("index.html",
-                                          {"request": request, "generated_code": code_manager.generated_code,
-                                           "execution_result": execution_result})
+        return templates.TemplateResponse(
+            "index.html",
+            {
+                "request": request,
+                "generated_code": code_manager.generated_code,
+                "execution_result": execution_result,
+            },
+        )
     except Exception as e:
         CodeGenLogger.lgr.error(f"Error occurred while executing code: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")

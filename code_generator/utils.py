@@ -9,7 +9,7 @@ import re
 def clean_response_to_code(response: str) -> str:
     try:
         # Regular expression to match code blocks
-        code_blocks = re.findall(r'```([\s\S]*?)```', response)
+        code_blocks = re.findall(r"```([\s\S]*?)```", response)
 
         # If there are no code blocks, return the original response
         if not code_blocks:
@@ -18,15 +18,21 @@ def clean_response_to_code(response: str) -> str:
 
         # If there is more than one code block, return all of them
         if len(code_blocks) > 1:
-            CodeGenLogger.lgr.info(f"Found {len(code_blocks)} code blocks in the response.")
+            CodeGenLogger.lgr.info(
+                f"Found {len(code_blocks)} code blocks in the response."
+            )
             return "\n\n".join(code_blocks).strip()
 
         # If there is only one code block, return it
         extracted_code = code_blocks[0].strip()
-        CodeGenLogger.lgr.info(f"Extracted the code {extracted_code} from the generated response {response}.")
+        CodeGenLogger.lgr.info(
+            f"Extracted the code {extracted_code} from the generated response {response}."
+        )
         return extracted_code
     except Exception as e:
-        CodeGenLogger.lgr.error(f"Error {e} occurred while cleaning code from response.")
+        CodeGenLogger.lgr.error(
+            f"Error {e} occurred while cleaning code from response."
+        )
         raise ValueError("Error occurred while cleaning code from response.")
 
 
